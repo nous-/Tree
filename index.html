@@ -6,16 +6,23 @@
 <script type="text/javascript" src="jquery.tmpl.min.js"></script>
 <script type="text/javascript" src="courses.js"></script>
 <script type="text/coffeescript" src="tree.coffee"></script>
-<link rel="stylesheet" href="tree.css" />
+<link rel="stylesheet" href="css/bootstrap.css" />
+<link rel="stylesheet" href="css/tree.css" />
 </head>
 <body>
-<header>Tree</header>
+<header>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <span class="brand">Tree</span>
+    </div>
+  </div>
+</header>
 
 
 <form id='searchForm' class='form-search' action=''>
   <div class='input-append'>
-  <input id='search' type="text" class="span2 search-query">
-  <button type="submit" class="btn-mini">Search</button>
+    <input id='search' type="text" class="span2 search-query" placeholder="search">
+    <a class="btn" type="submit"><i class="icon-search"></i></a>
   </div>
 </form>
 
@@ -23,20 +30,13 @@
 
 <div class="container">
   <div class="row">
-    <div class="span2" id='filters'>
-      <!--Sidebar content-->
-this is first column with filters stuff
-    </div>
-    <div class="span10">
-      <!--Body content-->
-here the results and content goes
+    <div class="span2" id='filters'></div>
+    <div class="span8">
+      <div id="results"></div>
     </div>
   </div>
 </div>
 
-
-
-<div id="results"></div>
 
 <script id="filterTemplate" type="text/x-jquery-tmpl">
 <div>
@@ -57,7 +57,7 @@ here the results and content goes
 </script>
 
 <script id="resultTemplate" type="text/x-jquery-tmpl">
-    Result: ${name}
+    Result: ${title}
 </script>
 
 </body>

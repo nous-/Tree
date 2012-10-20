@@ -21,7 +21,7 @@ class Tree
         console.log @filters
 
     # tags = ["tag=value", "..."]
-    search: (query, tags) ->
+    search: (query, tags) =>
         query = query.toLowerCase().trim()
         
         # clear the results and filters
@@ -33,7 +33,7 @@ class Tree
         # find matches
         for attr, value of @courses
             course = value
-            if query.length == 0 || course.name.toLowerCase().indexOf(query) != -1
+            if query.length == 0 || course.title.toLowerCase().indexOf(query) != -1
                 courses.push course
                 @addResult course
         
@@ -50,7 +50,6 @@ class Tree
         for attr, value of filters
             filterval = []
             for val in value
-                #console.log val
                 active = attr + " = " + val in tags
                 filterval.push {
                     name: val,
@@ -76,5 +75,7 @@ $ ->
     tree = new Tree courses, 'filters', 'results', 'filterTemplate', 'resultTemplate'
     tree.search '', []
     $('#searchForm').submit () ->
-        tree.search $('#search').val()
+        try
+            tree.search $('#search').val(), []
+        catch e then e
         return false
