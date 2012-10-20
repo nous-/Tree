@@ -4,7 +4,7 @@ class Tree
         @filterTemplate = $('#' + filterTemplate)
         @resultTemplate = $('#' + resultTemplate)
         @filters = $('#' + filter)
-        @results = $('#' + filter)
+        @results = $('#' + results)
         
         #@buildFilters()
         
@@ -65,9 +65,10 @@ class Tree
         for attr, value of filters
             filterval = []
             for val in value
+                console.log val
                 active = attr + " = " + val in tags
                 filterval.push {
-                    value: val,
+                    name: val,
                     active: active
                 }
         
@@ -76,8 +77,9 @@ class Tree
                 "values": filterval
             }
         
-        
-        @addFilter filters
+        filtero = filters: filtero
+        console.log filtero
+        @addFilter filtero
         
     addResult: (course) =>
         @resultTemplate.tmpl(course).appendTo(@results)
