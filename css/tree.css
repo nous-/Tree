@@ -1,0 +1,19 @@
+
+.container {
+    border: 1px solid #DDD;
+    margin: 10px;
+}
+
+#search { height: 25px; }
+
+.brand {
+    font-family: "Comic Sans MS", serif;
+}
+
+#filters {
+    overflow-x: auto;
+}
+
+#results {
+    font-family: "sans";
+}
