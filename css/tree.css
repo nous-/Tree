@@ -12,6 +12,14 @@
 
 #filters {
     overflow-x: auto;
+    border-right: 1px solid #DDD;
+    background-color: #F7F7F7;
+}
+
+.nav-header { border-bottom: 1px solid #DDD; }
+
+#filters li {
+    color: #08C;
 }
 
 #results {

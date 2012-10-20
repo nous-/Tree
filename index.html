@@ -39,21 +39,21 @@
 
 
 <script id="filterTemplate" type="text/x-jquery-tmpl">
-<div>
+<ul class="nav nav-list">
     {{each filters}}
-        ${name}
+        <li class="nav-header">${name}</li>
         {{each values}}
-            <div>
+            <li>
             {{if active}}
                 <input type='checkbox' checked>
             {{else}}
                 <input type='checkbox'>
             {{/if}}
             ${name}
-            </div>
+            </li>
         {{/each}}
     {{/each}}
-</div>
+</ul>
 </script>
 
 <script id="resultTemplate" type="text/x-jquery-tmpl">
