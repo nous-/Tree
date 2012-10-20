@@ -1,25 +1,39 @@
 var courses = {};
 
+function toObjectList(title, ary) {
+    var obj = []
+    for (var i = 0; i < ary.length; i++) {
+        var o = {}
+        o[title] = ary[i];
+        obj.push o
+    }
+    return obj;
+}
+
 // add course
-function a(title, provider, platform, topics, format, prerequisites, certificate, description, url, logo) {
+function a(title, provider, topics, platform, format, prerequisites, certificate, description, url, logo) {
+    topics = toObjectList("topic", topics);
+    format = toObjectList("format", format);
+    prerequisites = toObjectList("prerequisites", prerequisites);
+    
     var course = {
 		"title": title,
 		"provider": provider,
-        "platform": platform,
-		"tags": {
-			"provider": provider, //affilliate
-			"topics": topics, //array of topics
-			"platform": platform,
-			"format": format, //array of formats
-			"prerequisites": prerequisites, //array of prerequisite knowledge tags
-			"certificate": certificate //binary 
-        },
+		"tags":[
+			{ "provider": provider },
+			{ "platform": platform },
+			{ "certificate": certificate },
+            prerequisites,
+            format,
+            topics
+		],
 		"description": description,
 		"url": url,
-		"logo": logo //url of logo
+		"logo": logo
 	};
-    var key = name.replace(/ /g,'');
+    var key = title.replace(/ /g,'');
 	courses[key] = course;
 }
 
-a("Algorithms: Design and Analysis Part 2", "Stanford", "Coursera", ["Computer Science", "Engineering", "Algorithms"], ["Modules"], ["Algorithms", "Programming", "Proofs"], "Yes", "this is the description", "https://www.coursera.org/course/algo2", "https://s3.amazonaws.com/coursera/topics/algo2/large-icon.png")
+a("Course 1", "Coursera", ["Computer Science", "AI"], "Platform?", ["Modules", "Interactive"], ["Alogrithms", "Proofs"], true, "this is the description", "http://variancestudios.com", "logo");
+
