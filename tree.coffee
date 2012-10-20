@@ -37,35 +37,20 @@ class Tree
                 courses.push course
                 @addResult course
         
-        #console.log courses
-        
-        # build filters
-        ###
-            [
-                {
-                    "name":"filter",
-                    "values":{
-                        "value":"valksadjf",
-                        "checked":true
-                    }
-                }
-            ]
-        ###
-        
-        filters = []
-        for attr, value of courses
-            course = value
-            for attr, value of course.tags
-                unless filters[attr]?
-                    filters[attr] = []
-                unless value in filters[attr]
-                    filters[attr].push value
+        filters = {}
+        for attr, course of courses
+            for tag in course.tags
+                for attr, value of tag
+                    unless filters[attr]?
+                        filters[attr] = []
+                    unless value in filters[attr]
+                        filters[attr].push value
         
         filtero = []
         for attr, value of filters
             filterval = []
             for val in value
-                console.log val
+                #console.log val
                 active = attr + " = " + val in tags
                 filterval.push {
                     name: val,
@@ -78,7 +63,7 @@ class Tree
             }
         
         filtero = filters: filtero
-        console.log filtero
+        #console.log filtero
         @addFilter filtero
         
     addResult: (course) =>
@@ -92,4 +77,4 @@ $ ->
     tree.search '', []
     $('#searchForm').submit () ->
         tree.search $('#search').val()
-        false
+        return false

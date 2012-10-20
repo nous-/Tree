@@ -5,28 +5,24 @@ function toObjectList(title, ary) {
     for (var i = 0; i < ary.length; i++) {
         var o = {}
         o[title] = ary[i];
-        obj.push o
+        obj.push(o);
     }
     return obj;
 }
 
 // add course
 function a(title, provider, topics, platform, format, prerequisites, certificate, description, url, logo) {
-    topics = toObjectList("topic", topics);
-    format = toObjectList("format", format);
-    prerequisites = toObjectList("prerequisites", prerequisites);
+    var tags = [{ "provider": provider },
+                { "platform": platform },
+                { "certificate": certificate }];
+    tags = tags.concat(toObjectList("topic", topics));
+    tags = tags.concat(toObjectList("format", format));
+    tags = tags.concat(toObjectList("prerequisites", prerequisites));
     
     var course = {
 		"title": title,
 		"provider": provider,
-		"tags":[
-			{ "provider": provider },
-			{ "platform": platform },
-			{ "certificate": certificate },
-            prerequisites,
-            format,
-            topics
-		],
+		"tags":tags,
 		"description": description,
 		"url": url,
 		"logo": logo
