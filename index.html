@@ -11,8 +11,44 @@
 <link rel="stylesheet" href="css/tree.css" />
 </head>
 <body>
+<!-- This code should be placed directly after the opening <body> tag. -->
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    // init the FB JS SDK
+    FB.init({
+      appId      : '295024440611649', // App ID from the App Dashboard
+      channelUrl : '//dl.dropbox.com/u/38213714/Tree/channel.html', // Channel File for x-domain communication
+      status     : true, // check the login status upon init?
+      cookie     : true, // set sessions cookies to allow your server to access the session?
+      xfbml      : true  // parse XFBML tags on this page?
+    });
+
+    FB.getLoginStatus(function(response) {
+		if (response.status === 'connected') {
+		// connected
+		} else if (response.status === 'not_authorized') {
+		// not_authorized
+		} else {
+		// not_logged_in
+		}
+	});
+
+  };
+  
+  // Load the SDK's source Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+
 <header>
   <div class="navbar">
+  <div style='float:right' class="fb-login-button" data-show-faces="true" data-width="250" data-max-rows="1" id='login'></div>	
     <div class="navbar-inner">
       <span class="brand"><span><img src="img/tree.png" width="30" height="30"></span>&nbsp;Tree</span>
       <form id='searchForm' class='form-search' action='' style="margin-top:7px;margin-bottom:5px">
