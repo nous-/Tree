@@ -59,7 +59,15 @@
     <a href='${url}'>
       <h2 class="item-title">${title}</h2>
     </a>
-    <div class="provider">${provider}</div>
+    <div class="provider">
+      <span style="color:#777">By:</span><a href="#platform=${provider}">${provider}</a>
+      {{if requirements && requirements.length}}
+        <span style="color:#777">Prerequisites:</span>
+        {{each requirements}}
+          <span><a href="#prerequisites=${$value}">${$value}{{if $index != requirements.length-1}},{{/if}}</a></span>
+        {{/each}}
+      {{/if}}
+    </div>
   </div>
 	<div>${description}</div>
 </div>
