@@ -25,7 +25,8 @@ function a(title, provider, topics, platform, format, prerequisites, certificate
 		"tags":tags,
 		"description": description,
 		"url": url,
-		"logo": logo
+		"logo": logo,
+        "requirements": prerequisites || prerequisites.split(',')
 	};
     var key = title.replace(/ /g,'');
 	courses[key] = course;
@@ -66,3 +67,6 @@ a("Securing Digital Democracy", "University of Michigan", ["Information", "Desig
 a("Information Security and Risk Management in Context", "University of Washington", ["Information", "Design", "computer science"], "Coursera", ["Modules", "Interactive"], [], true, "Explore the latest techniques for securing information and its systems, from policies and procedures to technologies and audit. Learn from leading experts who share proven practices in areas such as mobile workforce safety, security metrics, electronic evidence oversight and coping with e-crime and e-discovery. Study the protection of Cloud computing information. Discover how to foster the development of future information security leaders.", "https://www.coursera.org/course/inforiskman", "https://s3.amazonaws.com/coursera/topics/inforiskman/large-icon.png");
 a("Compilers", "Stanford", ["Computer Science", "Programming"], "Coursera", ["Modules", "Interactive"], ["C#", "Java"], true, "This course will discuss the major ideas used today in the implementation of programming language compilers, including lexical analysis, parsing, syntax-directed translation, abstract syntax trees, types and type checking, intermediate languages, dataflow analysis, program optimization, code generation, and runtime systems. As a result, you will learn how a program written in a high-level language designed for humans is systematically translated into a program written in low-level assembly more suited to machines. Along the way we will also touch on how programming languages are designed, programming language semantics, and why there are so many different kinds of programming languages.", "https://www.coursera.org/course/compilers", "https://s3.amazonaws.com/coursera/topics/compilers/large-icon.png");
 a("Social Network Analysis", "Lada Adamic", ["Computer Science", "Network Analysis"], "Coursera", ["Modules", "Interactive"], [], true, "Everything is connected: people, information, events and places, all the more so with the advent of online social media. A practical way of making sense of the tangle of connections is to analyze them as networks. In this course you will learn about the structure and evolution of networks, drawing on knowledge from disciplines as diverse as sociology, mathematics, computer science, economics, and physics. Online interactive demonstrations and hands-on analysis of real-world data sets will focus on a range of tasks: from identifying important nodes in the network, to detecting communities, to tracing information diffusion and opinion formation.", "https://www.coursera.org/course/sna", "https://s3.amazonaws.com/coursera/topics/sna/small-icon.hover.png");
+
+
+
