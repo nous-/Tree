@@ -28,3 +28,8 @@
 #results {
     font-family: "sans";
 }
+
+.provider {
+	color: orange;
+	font-size: 10px;
+}
