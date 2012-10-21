@@ -16,9 +16,12 @@
     background-color: #F7F7F7;
 }
 
-.nav-header { border-bottom: 1px solid #DDD; }
+.nav-header {
+    border: 1px solid #DDD;
+    background-color: #DDD;
+}
 
-#filters li {
+#filters li:not(.nav-header) {
     color: #08C;
 }
 
