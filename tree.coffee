@@ -8,6 +8,13 @@ class Tree
         @tags = []
         @filter = []
         @lastquery = ""
+        @changecategory = ""
+
+    getFilters: () =>
+        @filter
+        
+    setFilters: (filters) =>
+    	@filter = filters
 
     # tags = ["tag=value", "..."]
     search: (query) =>
@@ -75,15 +82,23 @@ class Tree
         $('input[type=checkbox]').change @filterUpdate
 
     filterUpdate: (e) =>
-    	checkbox = $(e.target)
-    	filter = checkbox.attr('filter')
-    	if checkbox.is(':checked')
-    		@filter.push filter
-    	else
-    		i = @filter.indexOf(filter)
-    		@filter.splice(i, 1)
-
-    	@search @lastquery
+        checkbox = $(e.target)
+        filter = checkbox.attr('filter')
+        if checkbox.is(':checked')
+            @filter.push filter
+        else
+            i = @filter.indexOf(filter)
+            @filter.splice(i, 1)
+        
+        # update the url hash, and let the hash handler pick it up
+        filters = @getFilters()
+        filterString = ""
+        filterString += filter + ";" for filter in filters
+        query = escape(@lastquery)
+        if query.length == 0
+            window.location.hash = filterString
+        else
+            window.location.hash = "query=" + query + ";" + filterString
 
     addResult: (course) =>
         @resultTemplate.tmpl(course).appendTo(@results)
@@ -93,10 +108,42 @@ class Tree
 
 $ ->
     tree = new Tree courses, 'filters', 'results', 'filterTemplate', 'resultTemplate'
-    tree.search ''
+    tree.search '', []
+    
+    $(window).hashchange () ->
+        hash = location.hash
+        
+        #cut off the # and split on ;
+        operations = hash.substring(1).split(';')
+        
+        # example hash
+        # query=result;filter=value;filter=value
+        
+        query = ""
+        filters = []
+        
+        for operation in operations
+            part = operation.split('=')
+            if part[0] == "query"
+                query = unescape(part[1])
+                $('#search').val(query)
+            else if operation.length != 0
+                # assume filter
+                filters.push operation
+
+        tree.setFilters filters
+        tree.search query
+    
+    # parse the hash on page load
+    $(window).trigger 'hashchange'
     
     $('#search').keyup () ->
-        try
-            tree.search $('#search').val(), []
-        catch e then e
-        #return false
+        # update the url hash, and let the hash handler pick it up
+        filters = tree.getFilters()
+        filterString = ""
+        filterString += filter for filter in filters
+        query = escape($('#search').val().trim())
+        if query.length == 0
+            window.location.hash = filterString
+        else
+            window.location.hash = "query=" + query + ";" + filterString
