@@ -45,9 +45,9 @@
         {{each values}}
             <li>
             {{if active}}
-                <input type='checkbox' checked>
+                <input type='checkbox' checked filter='${filter}'>
             {{else}}
-                <input type='checkbox'>
+                <input type='checkbox' filter='${filter}'>
             {{/if}}
             ${name}
             </li>
