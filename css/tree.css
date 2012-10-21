@@ -8,6 +8,7 @@
 
 .brand {
     font-family: "Comic Sans MS", serif;
+    padding: 5px 20px 5px !important;
 }
 
 #filters {
@@ -32,7 +33,7 @@
 .provider {
 	color: orange;
 	font-size: 14px;
-	margin-top: 0;
+	margin-top: -4;
 	padding-left: 110px;
 }
 .item-title {
