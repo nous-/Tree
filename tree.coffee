@@ -19,10 +19,12 @@ class Tree
         @filters.html('')
         
         courses = []
+        filterCourses = []
         
         # find matches
         for attr, course of @courses
             if query.length == 0 || course.title.toLowerCase().indexOf(query) != -1
+                filterCourses.push course
                 if @filter.length != 0
                     matchAll = true;
                     for filter in @filter
@@ -42,6 +44,7 @@ class Tree
                 courses.push course
                 @addResult course
         
+        # group the filters
         filters = {}
         for attr, course of courses
             for tag in course.tags
