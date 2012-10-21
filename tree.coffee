@@ -5,20 +5,7 @@ class Tree
         @resultTemplate = $('#' + resultTemplate)
         @filters = $('#' + filter)
         @results = $('#' + results)
-        
-        #@buildFilters()
-        
-    # walk all the courses and find the tags and values
-    buildFilters: () =>
-        @filters = {}
-        for attr, value of @courses
-            course = value
-            for attr, value of course.tags
-                unless @filters[attr]?
-                    @filters[attr] = []
-                unless value in @filters[attr]
-                    @filters[attr].push value
-        console.log @filters
+        @tags = []
 
     # tags = ["tag=value", "..."]
     search: (query, tags) =>
@@ -53,7 +40,8 @@ class Tree
                 active = attr + " = " + val in tags
                 filterval.push {
                     name: val,
-                    active: active
+                    active: active,
+                    filter: attr + "=" + val
                 }
         
             filtero.push {
@@ -62,9 +50,16 @@ class Tree
             }
         
         filtero = filters: filtero
-        #console.log filtero
         @addFilter filtero
         
+        $('input[type=checkbox]').change @filterUpdate
+
+    filterUpdate: (e) =>
+    	checkbox = $(e.target)
+    	filter = checkbox.attr('filter')
+    	unless checkbox.is(':checked')
+    		@filter.push filter
+
     addResult: (course) =>
         @resultTemplate.tmpl(course).appendTo(@results)
     
@@ -74,8 +69,9 @@ class Tree
 $ ->
     tree = new Tree courses, 'filters', 'results', 'filterTemplate', 'resultTemplate'
     tree.search '', []
-    $('#searchForm').submit () ->
+    
+    $('#search').keyup () ->
         try
             tree.search $('#search').val(), []
         catch e then e
-        return false
+        #return false
