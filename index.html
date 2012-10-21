@@ -44,7 +44,7 @@
         <li class="nav-header">${name}</li>
         {{each values}}
             <li>
-            {{if active}}
+            {{if this.active}}
                 <input type='checkbox' checked filter='${filter}'>
             {{else}}
                 <input type='checkbox' filter='${filter}'>
