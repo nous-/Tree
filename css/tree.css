@@ -31,5 +31,12 @@
 
 .provider {
 	color: orange;
-	font-size: 10px;
+	font-size: 14px;
+	margin-top: 0;
+	padding-left: 110px;
+}
+.item-title {
+	padding-left: 110px;
+	font-size: 22px;
+	line-height: 20px;
 }

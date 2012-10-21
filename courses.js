@@ -25,7 +25,7 @@ function a(title, provider, topics, platform, format, prerequisites, certificate
 		"tags":tags,
 		"description": description,
 		"url": url,
-		"logo": logo
+		"logo": "https://s3.amazonaws.com/coursera/topics/stats1/small-icon.hover.png" //logo
 	};
     var key = title.replace(/ /g,'');
 	courses[key] = course;
