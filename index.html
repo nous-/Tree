@@ -13,7 +13,7 @@
 <header>
   <div class="navbar">
     <div class="navbar-inner">
-      <span class="brand">Tree</span>
+      <span class="brand"><span><img src="img/tree.png" width="30" height="30"></span>&nbsp;Tree</span>
     </div>
   </div>
 </header>
@@ -59,10 +59,14 @@
 </script>
 
 <script id="resultTemplate" type="text/x-jquery-tmpl">
-<div>
-  <img src="${logo}" class="img-rounded">
-	<h2><a href='${url}'>${title}</a></h2>
-  <div class="provider">${provider}</div>
+<div style="margin-bottom:20px">
+  <div style="display: inline-block;">
+    <img style="float:left" src="${logo}" class="img-rounded" width="100px" height="80px">
+    <a href='${url}'>
+      <h2 class="item-title">${title}</h2>
+    </a>
+    <div class="provider">${provider}</div>
+  </div>
 	<div>${description}</div>
 </div>
 </script>
