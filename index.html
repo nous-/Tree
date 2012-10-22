@@ -58,6 +58,7 @@
   </div>
 </header>
 
+<div id="treebox"></div>
 
 <div class="container">
   <div class="row">
@@ -96,6 +97,29 @@
     <a href='${url}'>
       <h2 class="item-title">${title}</h2>
     </a>
+    <a href='#' name='add'>Add Class</a>
+    <div class="provider">
+      <span style="color:#777">By:</span><a href="#provider=${provider}">${provider}</a>
+      {{if requirements && requirements.length}}
+        <span style="color:#777">Prerequisites:</span>
+        {{each requirements}}
+          <span><a href="#prerequisites=${$value}">${$value}{{if $index != requirements.length-1}},{{/if}}</a></span>
+        {{/each}}
+      {{/if}}
+    </div>
+  </div>
+	<div>${description}</div>
+</div>
+</script>
+
+<script id="boxTemplate" type="text/x-jquery-tmpl">
+<div style="margin-bottom:20px">
+  <div style="display: inline-block;">
+    <img style="float:left" src="${logo}" class="img-rounded" width="100px" height="80px">
+    <a href='${url}'>
+      <h3 class="item-title">${title}</h3>
+    </a>
+    <a href='#' name='remove'>Remove Class</a>
     <div class="provider">
       <span style="color:#777">By:</span><a href="#provider=${provider}">${provider}</a>
       {{if requirements && requirements.length}}

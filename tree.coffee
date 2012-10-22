@@ -1,5 +1,6 @@
 class Tree
     constructor: (courses, filter, results, filterTemplate, resultTemplate) ->
+        @bag = new Bag
         @courses = courses
         @filterTemplate = $('#' + filterTemplate)
         @resultTemplate = $('#' + resultTemplate)
@@ -9,12 +10,24 @@ class Tree
         @filter = []
         @lastquery = ""
         @changecategory = ""
+        
+        @loadBag()
+        
+    loadBag: () =>
+        bag = @bag.getBag()
+        for course in bag
+            @addBag course
+
+    addBag: (course) =>
+        element = $('#boxTemplate').tmpl(course).appendTo($('#treebox'))
+        element.find("a[name='remove']").click () ->
+        	element.remove()
 
     getFilters: () =>
         @filter
         
     setFilters: (filters) =>
-    	@filter = filters
+        @filter = filters
 
     # tags = ["tag=value", "..."]
     search: (query) =>
@@ -101,10 +114,46 @@ class Tree
             window.location.hash = "query=" + query + ";" + filterString
 
     addResult: (course) =>
-        @resultTemplate.tmpl(course).appendTo(@results)
+        result = @resultTemplate.tmpl(course)
+        result.find('a[name="add"]').click () =>
+            @addBag course
+
+        result.appendTo(@results)
     
     addFilter: (filters) =>
         @filterTemplate.tmpl(filters).appendTo(@filters)
+
+class Bag
+    constructor: ->
+        @bag = @getBag()
+        
+    add: (course) =>
+        @bag.push course
+        setBag @bag
+        
+    getBag: () ->
+        cookies = document.cookie.split(';');
+        bag = []
+        
+        for cookie in cookies
+            part = cookie.split('=')
+            if part[0] == "treebag"
+                bag = jQuery.parseJSON(unescape(part[1]))
+        bag
+        
+    setBag: (bag) ->
+        json = escape(JSON.stringify(bag))
+
+        cookies = document.cookie.split(';')
+        cookieStr = ""
+        for cookie in cookies
+            part = cookie.split('=')
+            unless part[0] == "treebag"
+                cookieStr += cookie + ";";
+
+        cookieStr += 'bag=' + json;
+
+        document.cookie = cookieStr + '; expires=Thu, 2 Aug 2050 20:47:11 UTC; path=/'
 
 $ ->
     tree = new Tree courses, 'filters', 'results', 'filterTemplate', 'resultTemplate'
