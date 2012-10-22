@@ -20,7 +20,8 @@ class Tree
 
     addBag: (course) =>
         element = $('#boxTemplate').tmpl(course).appendTo($('#treebox'))
-        element.find("a[name='remove']").click () ->
+        element.find("a[name='remove']").click () =>
+        	@remoteBag course
         	element.remove()
 
     getFilters: () =>
