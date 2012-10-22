@@ -23,6 +23,7 @@ class Tree
         element.find("a[name='remove']").click () =>
         	@remoteBag course
         	element.remove()
+        	false
 
     getFilters: () =>
         @filter
@@ -118,6 +119,7 @@ class Tree
         result = @resultTemplate.tmpl(course)
         result.find('a[name="add"]').click () =>
             @addBag course
+            false
 
         result.appendTo(@results)
     
