@@ -58,16 +58,16 @@
   </div>
 </header>
 
-<div id="treebox"></div>
-
 <div class="container">
   <div class="row">
     <div class="span3" id='filters'></div>
-    <div class="span8">
+    <div class="span6">
       <div style="" id="results"></div>
     </div>
   </div>
 </div>
+
+<div id="treebox" style='position:absolute;left:740px;top:80px;width:200px;background-color:#FDFDFD;border:1px dashed gray;padding:5px'></div>
 
 
 <script id="filterTemplate" type="text/x-jquery-tmpl">
@@ -100,29 +100,6 @@
     <a href='${url}'>
       <h2 class="item-title">${title}</h2>
     </a>
-    <a href='#' name='add'>Add Class</a>
-    <div class="provider">
-      <span style="color:#777">By:</span><a href="#provider=${provider}">${provider}</a>
-      {{if requirements && requirements.length}}
-        <span style="color:#777">Prerequisites:</span>
-        {{each requirements}}
-          <span><a href="#prerequisites=${$value}">${$value}{{if $index != requirements.length-1}},{{/if}}</a></span>
-        {{/each}}
-      {{/if}}
-    </div>
-  </div>
-	<div>${description}</div>
-</div>
-</script>
-
-<script id="boxTemplate" type="text/x-jquery-tmpl">
-<div style="margin-bottom:20px">
-  <div style="display: inline-block;">
-    <img style="float:left" src="${logo}" class="img-rounded" width="100px" height="80px">
-    <a href='${url}'>
-      <h3 class="item-title">${title}</h3>
-    </a>
-    <a href='#' name='remove'>Remove Class</a>
     <div class="provider">
       <span style="color:#777">By:</span><a href="#provider=${provider}">${provider}</a>
       {{if requirements && requirements.length}}
@@ -141,6 +118,23 @@
     </div>
   </div>
 	<div>${description}</div>
+  <div style="float:right">
+    <a href='#' name='add'>Add Class</a>
+  </div>
+</div>
+</script>
+
+<script id="boxTemplate" type="text/x-jquery-tmpl">
+<div style="margin-bottom:20px">
+  <div style="display: inline-block;">
+    <img style="float:left" src="${logo}" class="img-rounded" width="30px" height="30px">
+    <a href='${url}'>
+      <h6>${title}</h6>
+    </a>
+    <div style="float:right">
+      <a href='#' name='remove'>Remove Class</a>
+    </div>
+  </div>
 </div>
 </script>
 
