@@ -24,9 +24,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="span2" id='filters'></div>
+    <div class="span3" id='filters'></div>
     <div class="span8">
-      <div id="results"></div>
+      <div style="" id="results"></div>
     </div>
   </div>
 </div>
@@ -53,9 +53,12 @@
 </script>
 
 <script id="resultTemplate" type="text/x-jquery-tmpl">
-<div style="margin-bottom:20px">
+<div style="margin: 20px 0 20px 0">
   <div style="display: inline-block;">
+<!-- previous version which was ok for coursera
     <img style="float:left" src="${logo}" class="img-rounded" width="100px" height="80px">
+-->
+    <img style="float:left; width:auto; height:60px; max-height:60px; max-width:100px" src="${logo}" class="img-rounded">
     <a href='${url}'>
       <h2 class="item-title">${title}</h2>
     </a>
@@ -67,6 +70,13 @@
           <span><a href="#prerequisites=${$value}">${$value}{{if $index != requirements.length-1}},{{/if}}</a></span>
         {{/each}}
       {{/if}}
+      {{each rating}}
+        {{if $value == 1}}
+          <i class="icon-star"></i>
+        {{else}}
+          <i class="icon-star icon-white"></i>
+        {{/if}}
+      {{/each}}
     </div>
   </div>
 	<div>${description}</div>
